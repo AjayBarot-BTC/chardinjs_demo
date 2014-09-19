@@ -1,0 +1,62 @@
+<body>
+<div class="container">
+  <div class="jumbotron">
+    <h1 data-intro="Project title" data-position="right">Chardin.js</h1>
+    <p class="lead">
+      Simple overlay instructions for your apps.
+    </p>
+    <div id="myid">
+    <img src="http://s11.postimg.org/5j9wr7n8z/chardin.png" data-intro="An awesome 18th-century painter, who found beauty in everyday, common things." data-position="right" />
+    </div>
+    <a href="#" class="btn btn-large primary" data-toggle="chardinjs" data-intro="This button toggles the overlay, you can click it, even when the overlay is visible" data-position="left">See it in action</a>
+    <a href="" id="opentour" class="hide" data-toggle="chardinjs">Or open it again</a>
+    <div class="credits">
+      <p data-intro="Author of this plugin, aka Pablo Fernandez" data-position="right">
+        Baked with
+        <b>&lt;3</b>
+        by
+        <a href="https://github.com/heelhook">@heelhook</a>.
+      </p>
+    </div>
+  </div>
+
+
+  <div class="links">
+    <p id="links" data-intro="Links to Github, Twitter, etc." data-position="top">
+      <a href="https://twitter.com/share" class="twitter-share-button" data-lang="en" data-text="Check out Chardin.js, simple overlay instructions for apps, https://heelhook.github.com/chardin.js" data-count="none" data-via="pablo2dot0">Tweet</a>
+      <a href="https://twitter.com/pablo2dot0" class="twitter-follow-button" data-show-count="false" data-lang="en">Follow @pablo2dot0</a>
+      <iframe style="display: inline-block;" frameborder="no" scrolling="no" height="30px" width="70px" src="http://hnlike.com/upvote.php?link=http%3A%2F%2Fheelhook.github.com&title=Chardin">iframes not supported by your browser</iframe>
+    </p>
+  </div>
+
+  <div class="license">
+    Code licensed under the
+    <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License v2.0</a>.
+  </div>
+</div>
+</body>
+
+<script language="javascript">
+    $(document).ready(function() {
+        $('body').chardinJs();
+        $('a[data-toggle="chardinjs"]').on('click', function(e) {
+            e.preventDefault();
+            if ($('.jumbotron img').is(':visible')) {
+                return ($('body').data('chardinJs')).toggle();
+            } else {
+                return $('.jumbotron img').animate({
+                    height: 250
+                }, 600, function() {
+                    console.log(($('body').data('chardinJs')));
+                    return ($('body').data('chardinJs')).toggle();
+                });
+            }
+        });
+        return $('body').on('chardinJs:stop', function() {
+            $('a.btn.primary').off('click').text('See more on Github').attr('href', 'https://github.com/heelhook/chardin.js');
+            return $('a#opentour').css({
+                display: 'block'
+            });
+        });
+    });
+</script>
